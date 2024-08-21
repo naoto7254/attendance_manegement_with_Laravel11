@@ -7,5 +7,5 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/register-salary', [SalaryController::class, 'showRegisterFrom'])->name('register.salary');
-Route::post('/confirm-salary', [SalaryController::class, 'confirm'])->name('confirm.salary');
+Route::get('/register-salary', [SalaryController::class, 'showRegisterFrom'])->name('salary.register');
+Route::post('/confirm-salary', [SalaryController::class, 'confirm'])->name('salary.confirm');
