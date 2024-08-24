@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PartUsers;
 
 class SalaryController extends Controller
 {
-    public function showRegisterFrom()
+    public function showRegisterForm()
     {
         return view('register_salary');
     }
@@ -17,9 +18,9 @@ class SalaryController extends Controller
             'date' => ['required', 'date'],
             'name' => ['required', 'string', 'max:255', 'exists:part_users,part_timer_name'],
             'shift_types' => ['required', 'array'],
-            'morning_bonus' => ['required', 'in:none,10,20,30'],
-            'afternoon_bonus' => ['required', 'in:none,10,20,30'],
-            'evening_bonus' => ['required', 'in:none,10,20,30'],
+            'morning_bonus' => ['required', 'in:none,10minutes_less,20minutes_less,30minutes_less'],
+            'afternoon_bonus' => ['required', 'in:none,10minutes_less,20minutes_less,30minutes_less'],
+            'evening_bonus' => ['required', 'in:none,10minutes_less,20minutes_less,30minutes_less'],
             'morning_delay_bonus' => ['required', 'in:none,exist'],
             'afternoon_delay_bonus' => ['required', 'in:none,exist'],
             'evening_delay_bonus' => ['required', 'in:none,exist'],
@@ -46,6 +47,11 @@ class SalaryController extends Controller
             'evening_delay_bonus.in' => '夜の遅延ボーナスの選択が無効です。',
         ]);
 
-        return view('confirm_salary', ['data' => $data]);
+        $partUser = PartUsers::where('part_timer_name', $data['name'])->firstOrFail();
+
+        return view('confirm_salary', [
+            'data' => $data,
+            'partUser' => $partUser
+        ]);
     }
 }

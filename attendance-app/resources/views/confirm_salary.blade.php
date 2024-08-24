@@ -17,6 +17,7 @@
     <p>遅延ボーナス(朝): {{ $data['morning_delay_bonus'] }}</p>
     <p>遅延ボーナス(昼): {{ $data['afternoon_delay_bonus'] }}</p>
     <p>遅延ボーナス(夕): {{ $data['evening_delay_bonus'] }}</p>
+    <p>PartUser(MySQLからデータを取ってくるテスト): {{ $partUser->part_timer_name }}</p>
 
     <form action="">
         <button type="button" onclick="history.back()">戻る</button>

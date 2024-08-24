@@ -46,31 +46,31 @@
             <label for="morning_bonus_none">朝ボーナス:</label>
             <input type="radio" id="morning_bonus_none" name="morning_bonus" value="none" {{ old('morning_bonus', 'none') === 'none' ? 'checked' : '' }}>
             <label for="morning_bonus_none">なし</label>
-            <input type="radio" id="morning_bonus_10" name="morning_bonus" value="10" {{ old('morning_bonus') === '10' ? 'checked' : '' }}>
+            <input type="radio" id="morning_bonus_10" name="morning_bonus" value="10minutes_less" {{ old('morning_bonus') === '10minutes_less' ? 'checked' : '' }}>
             <label for="morning_bonus_10">10分</label>
-            <input type="radio" id="morning_bonus_20" name="morning_bonus" value="20" {{ old('morning_bonus') === '20' ? 'checked' : '' }}>
+            <input type="radio" id="morning_bonus_20" name="morning_bonus" value="20minutes_less" {{ old('morning_bonus') === '20minutes_less' ? 'checked' : '' }}>
             <label for="morning_bonus_20">20分</label>
-            <input type="radio" id="morning_bonus_30" name="morning_bonus" value="30" {{ old('morning_bonus') === '30' ? 'checked' : '' }}>
+            <input type="radio" id="morning_bonus_30" name="morning_bonus" value="30minutes_less" {{ old('morning_bonus') === '30minutes_less' ? 'checked' : '' }}>
             <label for="morning_bonus_30">30分</label><br>
 
             <label for="afternoon_bonus">昼ボーナス:</label>
             <input type="radio" id="afternoon_bonus_none" name="afternoon_bonus" value="none" {{ old('afternoon_bonus', 'none') === 'none' ? 'checked' : '' }}>
             <label for="afternoon_bonus_none">なし</label>
-            <input type="radio" id="afternoon_bonus_10" name="afternoon_bonus" value="10" {{ old('afternoon_bonus') === '10' ? 'checked' : '' }}>
+            <input type="radio" id="afternoon_bonus_10" name="afternoon_bonus" value="10minutes_less" {{ old('afternoon_bonus') === '10minutes_less' ? 'checked' : '' }}>
             <label for="afternoon_bonus_10">10分</label>
-            <input type="radio" id="afternoon_bonus_20" name="afternoon_bonus" value="20" {{ old('afternoon_bonus') === '20' ? 'checked' : '' }}>
+            <input type="radio" id="afternoon_bonus_20" name="afternoon_bonus" value="20minutes_less" {{ old('afternoon_bonus') === '20minutes_less' ? 'checked' : '' }}>
             <label for="afternoon_bonus_20">20分</label>
-            <input type="radio" id="afternoon_bonus_30" name="afternoon_bonus" value="30" {{ old('afternoon_bonus') === '30' ? 'checked' : '' }}>
+            <input type="radio" id="afternoon_bonus_30" name="afternoon_bonus" value="30minutes_less" {{ old('afternoon_bonus') === '30minutes_less' ? 'checked' : '' }}>
             <label for="afternoon_bonus_30">30分</label><br>
 
             <label for="evening_bonus">夜ボーナス:</label>
             <input type="radio" id="evening_bonus_none" name="evening_bonus" value="none" {{ old('evening_bonus', 'none') === 'none' ? 'checked' : '' }}>
             <label for="evening_bonus_none">なし</label>
-            <input type="radio" id="evening_bonus_10" name="evening_bonus" value="10" {{ old('evening_bonus') === '10' ? 'checked' : '' }}>
+            <input type="radio" id="evening_bonus_10" name="evening_bonus" value="10minutes_less" {{ old('evening_bonus') === '10minutes_less' ? 'checked' : '' }}>
             <label for="evening_bonus_10">10分</label>
-            <input type="radio" id="evening_bonus_20" name="evening_bonus" value="20" {{ old('evening_bonus') === '20' ? 'checked' : '' }}>
+            <input type="radio" id="evening_bonus_20" name="evening_bonus" value="20minutes_less" {{ old('evening_bonus') === '20minutes_less' ? 'checked' : '' }}>
             <label for="evening_bonus_20">20分</label>
-            <input type="radio" id="evening_bonus_30" name="evening_bonus" value="30" {{ old('evening_bonus') === '30' ? 'checked' : '' }}>
+            <input type="radio" id="evening_bonus_30" name="evening_bonus" value="30minutes_less" {{ old('evening_bonus') === '30minutes_less' ? 'checked' : '' }}>
             <label for="evening_bonus_30">30分</label><br>
         </div>
 
@@ -90,7 +90,6 @@
             <label for="evening_delay_bonus">遅延ボーナス(夕):</label>
             <input type="radio" id="evening_delay_bonus_none" name="evening_delay_bonus" value="none" {{ old('evening_delay_bonus', 'none') === 'none' ? 'checked' : '' }}>
             <label for="evening_delay_bonus_none">なし</label>
-
             <input type="radio" id="evening_delay_bonus_exist" name="evening_delay_bonus" value="exist" {{ old('evening_delay_bonus') === '10' ? 'checked' : '' }}>
             <label for="evening_delay_bonus_exist">あり</label><br>
         </div>
