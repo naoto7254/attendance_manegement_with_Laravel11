@@ -17,7 +17,13 @@
     <p>遅延ボーナス(朝): {{ $data['morning_delay_bonus'] }}</p>
     <p>遅延ボーナス(昼): {{ $data['afternoon_delay_bonus'] }}</p>
     <p>遅延ボーナス(夕): {{ $data['evening_delay_bonus'] }}</p>
-    <p>PartUser(MySQLからデータを取ってくるテスト): {{ $partUser->part_timer_name }}</p>
+    <p>baseSalary: {{ var_dump($baseSalary) }}</p>
+    <p>morningBonusSalary: {{ var_dump($morningBonusSalary) }}</p>
+    <p>afternoonBonusSalary: {{ var_dump($afternoonBonusSalary) }}</p>
+    <p>eveningBonusSalary: {{ var_dump($eveningBonusSalary) }}</p>
+    <p>morningDelayBonusSalary: {{ var_dump($morningDelayBonusSalary) }}</p>
+    <p>afternoonDelayBonusSalary: {{ var_dump($afternoonDelayBonusSalary) }}</p>
+    <p>eveningDelayBonusSalary: {{ var_dump($eveningDelayBonusSalary) }}</p>
 
     <form action="">
         <button type="button" onclick="history.back()">戻る</button>

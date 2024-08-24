@@ -29,24 +29,24 @@ class SalaryCalculator
                 return self::$morningSalaries[$level];
             case 'afternoon':
                 return self::$afternoonSalaries[$level];
-            case 'night':
+            case 'evening':
                 return self::$eveningSalaries[$level];
         }
     }
 
-    public static function calcBonusSalary(int $level, string $bonusLevel)
+    public static function calcBonusSalary(int $level, string $bonusLevel): array
     {
         if ($level === 1) {
-            return 0;
-        } elseif ($level < 5) {
-            return self::$bonusSalaries[$bonusLevel];
+            return ['salary' => 0];
+        } elseif ($level < 6) {
+            return ['salary' => self::$bonusSalaries[$bonusLevel]];
         } else {
-            return self::$bonusTickets[$bonusLevel];
+            return ['ticket' => self::$bonusTickets[$bonusLevel]];
         }
     }
 
-    public static function calcDelaySalary()
+    public static function calcDelaySalary(): array
     {
-        return 500;
+        return ['salary' => 500];
     }
 }

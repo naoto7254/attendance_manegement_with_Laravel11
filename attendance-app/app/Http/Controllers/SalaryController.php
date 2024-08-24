@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PartUsers;
+use App\Services\SalaryCalculator;
 
 class SalaryController extends Controller
 {
@@ -47,11 +48,54 @@ class SalaryController extends Controller
             'evening_delay_bonus.in' => '夜の遅延ボーナスの選択が無効です。',
         ]);
 
+        // MySQLからユーザー情報を取得
         $partUser = PartUsers::where('part_timer_name', $data['name'])->firstOrFail();
+        $partUserLevel = $partUser->part_timer_level;
+
+        // 基本給料の計算
+        $baseSalary = [];
+        foreach ($data['shift_types'] as $shiftType) {
+            $baseSalary[$shiftType] = SalaryCalculator::calcBaseSalary($partUserLevel, $shiftType);
+        }
+
+        // 短縮ボーナスの計算
+        $morningBonusSalary = $this->calculateBonusSalary($partUserLevel, $data['morning_bonus']);
+        $afternoonBonusSalary = $this->calculateBonusSalary($partUserLevel, $data['afternoon_bonus']);
+        $eveningBonusSalary = $this->calculateBonusSalary($partUserLevel, $data['evening_bonus']);
+
+        // 遅延ボーナスの計算
+        $morningDelayBonusSalary = $this->calculateDelayBonusSalary($data['morning_delay_bonus']);
+        $afternoonDelayBonusSalary = $this->calculateDelayBonusSalary($data['afternoon_delay_bonus']);
+        $eveningDelayBonusSalary = $this->calculateDelayBonusSalary($data['evening_delay_bonus']);
+
 
         return view('confirm_salary', [
             'data' => $data,
-            'partUser' => $partUser
+            'baseSalary' => $baseSalary,
+            'morningBonusSalary' => $morningBonusSalary,
+            'afternoonBonusSalary' => $afternoonBonusSalary,
+            'eveningBonusSalary' => $eveningBonusSalary,
+            'morningDelayBonusSalary' => $morningDelayBonusSalary,
+            'afternoonDelayBonusSalary' => $afternoonDelayBonusSalary,
+            'eveningDelayBonusSalary' => $eveningDelayBonusSalary
         ]);
+    }
+
+    private function calculateBonusSalary(int $level, string $bonusType): array
+    {
+        if ($bonusType === 'none') {
+            return ['salary' => 0];
+        }
+
+        return SalaryCalculator::calcBonusSalary($level, $bonusType);
+    }
+
+    private function calculateDelayBonusSalary(string $bonusType): array
+    {
+        if ($bonusType === 'none') {
+            return ['salary' => 0];
+        }
+
+        return SalaryCalculator::calcDelaySalary();
     }
 }
