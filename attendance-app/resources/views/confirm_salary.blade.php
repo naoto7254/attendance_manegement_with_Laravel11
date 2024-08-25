@@ -8,22 +8,45 @@
 <body>
     <h1>登録情報確認ページ</h1>
 
-    <p>日付: {{ $data['date'] }}</p>
-    <p>名前: {{ $data['name'] }}</p>
-    <p>シフトタイプ: {{ implode(', ', $data['shift_types']) }}</p>
-    <p>朝ボーナス: {{ $data['morning_bonus'] }}</p>
-    <p>昼ボーナス: {{ $data['afternoon_bonus'] }}</p>
-    <p>夕ボーナス: {{ $data['evening_bonus'] }}</p>
-    <p>遅延ボーナス(朝): {{ $data['morning_delay_bonus'] }}</p>
-    <p>遅延ボーナス(昼): {{ $data['afternoon_delay_bonus'] }}</p>
-    <p>遅延ボーナス(夕): {{ $data['evening_delay_bonus'] }}</p>
-    <p>baseSalary: {{ var_dump($baseSalary) }}</p>
-    <p>morningBonusSalary: {{ var_dump($morningBonusSalary) }}</p>
-    <p>afternoonBonusSalary: {{ var_dump($afternoonBonusSalary) }}</p>
-    <p>eveningBonusSalary: {{ var_dump($eveningBonusSalary) }}</p>
-    <p>morningDelayBonusSalary: {{ var_dump($morningDelayBonusSalary) }}</p>
-    <p>afternoonDelayBonusSalary: {{ var_dump($afternoonDelayBonusSalary) }}</p>
-    <p>eveningDelayBonusSalary: {{ var_dump($eveningDelayBonusSalary) }}</p>
+    <h2>基本給料</h2>
+    <table>
+        <thead>
+            <tr>
+                @foreach ($tableDataBasicSalary['info'] as $info)
+                    <th>{{ $info }}</th>
+                @endforeach
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (['morning', 'afternoon', 'evening'] as $shift)
+                <tr>
+                    @foreach ($tableDataBasicSalary[$shift] as $value)
+                        <td>{{ $value }}</td>
+                    @endforeach
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    <h2>ボーナス給料</h2>
+    <table>
+        <thead>
+            <tr>
+                @foreach ($tableDataBonusSalary['info'] as $info)
+                    <th>{{ $info }}</th>
+                @endforeach
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (['morning', 'afternoon', 'evening'] as $shift)
+                <tr>
+                    <td>{{ $tableDataBonusSalary[$shift][0] }}</td>
+                    <td>{{ $tableDataBonusSalary[$shift][$shift . 'BonusSalary'] }}</td>
+                    <td>{{ $tableDataBonusSalary[$shift][$shift . 'DelayBonusSalary'] }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 
     <form action="">
         <button type="button" onclick="history.back()">戻る</button>

@@ -59,25 +59,33 @@ class SalaryController extends Controller
         }
 
         // 短縮ボーナスの計算
-        $morningBonusSalary = $this->calculateBonusSalary($partUserLevel, $data['morning_bonus']);
-        $afternoonBonusSalary = $this->calculateBonusSalary($partUserLevel, $data['afternoon_bonus']);
-        $eveningBonusSalary = $this->calculateBonusSalary($partUserLevel, $data['evening_bonus']);
+        $bonusSalary = [
+            'morning' => [
+                'morningBonusSalary' => $this->calculateBonusSalary($partUserLevel, $data['morning_bonus']),
+                'morningDelayBonusSalary' => $this->calculateDelayBonusSalary($data['morning_delay_bonus'])
+            ],
+            'afternoon' => [
+                'afternoonBonusSalary' => $this->calculateBonusSalary($partUserLevel, $data['afternoon_bonus']),
+                'afternoonDelayBonusSalary' => $this->calculateDelayBonusSalary($data['afternoon_delay_bonus'])
+            ],
+            'evening' => [
+                'eveningBonusSalary' => $this->calculateBonusSalary($partUserLevel, $data['evening_bonus']),
+                'eveningDelayBonusSalary' => $this->calculateDelayBonusSalary($data['evening_delay_bonus'])
+            ]
+        ];
 
-        // 遅延ボーナスの計算
-        $morningDelayBonusSalary = $this->calculateDelayBonusSalary($data['morning_delay_bonus']);
-        $afternoonDelayBonusSalary = $this->calculateDelayBonusSalary($data['afternoon_delay_bonus']);
-        $eveningDelayBonusSalary = $this->calculateDelayBonusSalary($data['evening_delay_bonus']);
 
+        // returnさせたいデータ
+        $tableDataBasicSalary = $this->toTableBasicSalaryResult($baseSalary);
+        $tableDataBonusSalary = $this->toTableBonusSalaryResult($bonusSalary);
 
         return view('confirm_salary', [
             'data' => $data,
+            'partUser' => $partUser,
             'baseSalary' => $baseSalary,
-            'morningBonusSalary' => $morningBonusSalary,
-            'afternoonBonusSalary' => $afternoonBonusSalary,
-            'eveningBonusSalary' => $eveningBonusSalary,
-            'morningDelayBonusSalary' => $morningDelayBonusSalary,
-            'afternoonDelayBonusSalary' => $afternoonDelayBonusSalary,
-            'eveningDelayBonusSalary' => $eveningDelayBonusSalary
+            'bonusSalary' => $bonusSalary,
+            'tableDataBasicSalary' => $tableDataBasicSalary,
+            'tableDataBonusSalary' => $tableDataBonusSalary
         ]);
     }
 
@@ -97,5 +105,67 @@ class SalaryController extends Controller
         }
 
         return SalaryCalculator::calcDelaySalary();
+    }
+
+    private function toTableBasicSalaryResult($basicSalary): array
+    {
+        $tableDataBasicSalary = [
+            'info' => ['シフトタイプ', '勤務有無', '発生給与'],
+            'morning' => ['朝', 'なし', '0円'],
+            'afternoon' => ['昼', 'なし', '0円'],
+            'evening' => ['夕', 'なし', '0円']
+        ];
+
+        foreach ($basicSalary as $shiftType => $bonus) {
+            $tableDataBasicSalary[$shiftType][1] = 'あり';
+            $tableDataBasicSalary[$shiftType][2] = "{$bonus}円";
+        }
+
+        return $tableDataBasicSalary;
+    }
+
+    private function toTableBonusSalaryResult($bonusSalary): array
+    {
+        $tableDataBonusSalary = [
+            'info' => [
+                'シフトタイプ',
+                '短縮ボーナス',
+                '遅延ボーナス'
+            ],
+            'morning' => [
+                '朝',
+                'morningBonusSalary' => 'なし',
+                'morningDelayBonusSalary' => 'なし'
+            ],
+            'afternoon' => [
+                '昼',
+                'afternoonBonusSalary' => 'なし',
+                'afternoonDelayBonusSalary' => 'なし'
+            ],
+            'evening' => [
+                '夕',
+                'eveningBonusSalary' => 'なし',
+                'eveningDelayBonusSalary' => 'なし'
+            ]
+        ];
+
+        // ネストしすぎ...
+        foreach ($bonusSalary as $shiftType => $bonuses) {
+            foreach ($bonuses as $bonusKey => $bonus) {
+                foreach ($bonus as $attribute => $value) {
+
+                    switch ($attribute) {
+                        case 'ticket':
+                            $tableDataBonusSalary[$shiftType][$bonusKey] = "チケット: {$bonus['ticket']}枚";
+                            break;
+                        default:
+                            $tableDataBonusSalary[$shiftType][$bonusKey] = "{$bonus['salary']}円";
+                            break;
+                    }
+                }
+            }
+        }
+
+        return $tableDataBonusSalary;
     }
 }
