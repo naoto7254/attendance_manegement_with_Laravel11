@@ -17,6 +17,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            font-family: "游明朝", "Yu Mincho", "MS Mincho", "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", serif;
         }
 
         .custom-container {
@@ -27,6 +28,13 @@
             max-width: 500px;
             margin: 2rem auto;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            width: 215px;
         }
 
         .animated-input {
@@ -47,8 +55,10 @@
     </style>
 </head>
 <body>
+    <img src="{{ asset('images/mid_fiels_farm_log.svg') }}" alt="Logo" class="logo">
+
     <div class="custom-container mt5">
-        <h1 class="container mb-4">勤怠登録画面</h1>
+        <h1 class="container mb-3">勤怠登録画面</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -62,18 +72,18 @@
 
         <form action="{{ route('salary.confirm') }}" method="POST">
             @csrf
-            <div class="mb-3">
-                <label for="date" class="form-label animated-label">日付:</label>
+            <div class="d-flex align-items-center mb-2">
+                <label for="date" class="form-label animated-label mb-0" style="white-space: nowrap; flex-shrink: 0;">日付: </label>
                 <input type="date" name="date" id="date" class="form-control animated-input" value="{{ old('date', now()->format('Y-m-d')) }}" required>
             </div>
 
-            <div class="mb-3">
-                <label for="name" class="form-label animated-label">名前:</label>
+            <div class="d-flex align-items-center mb-2">
+                <label for="name" class="form-label animated-label mb-0" style="flex-shrink: 0;">名前: </label>
                 <input type="text" id="name" name="name" class="form-control animated-input" value="{{ old('name') }}">
             </div>
 
-            <div class="mb-3">
-                <label class="form-label animated-label">シフトタイプ:</label>
+            <div class="mb-2">
+                <label class="form-label animated-label">シフトタイプ: </label>
                 <div class="form-check form-check-inline">
                     <input type="checkbox" id="morning" name="shift_types[]" value="morning" class="form-check-input animated-input" {{ in_array('morning', old('shift_types', [])) ? 'checked' : '' }}>
                     <label for="morning" class="form-check-label animated-label">朝</label>
@@ -88,8 +98,8 @@
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="morning_bonus_none" class="form-label animated-label">朝ボーナス:</label>
+            <div class="mb-2">
+                <label for="morning_bonus_none" class="form-label animated-label">朝ボーナス: </label>
                 <div class="form-check form-check-inline">
                     <input type="radio" id="morning_bonus_none" name="morning_bonus" class="form-check-input animated-input" value="none" {{ old('morning_bonus', 'none') === 'none' ? 'checked' : '' }}>
                     <label for="morning_bonus_none" class="form-check-label animated-label">なし</label>
@@ -108,8 +118,8 @@
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="afternoon_bonus" class="form-label animated-label">昼ボーナス:</label>
+            <div class="mb-2">
+                <label for="afternoon_bonus" class="form-label animated-label">昼ボーナス: </label>
                 <div class="form-check form-check-inline">
                     <input type="radio" id="afternoon_bonus_none" name="afternoon_bonus" class="form-check-input animated-input" value="none" {{ old('afternoon_bonus', 'none') === 'none' ? 'checked' : '' }}>
                     <label for="afternoon_bonus_none" class="form-check-label animated-label">なし</label>
@@ -128,8 +138,8 @@
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="evening_bonus" class="form-label animated-label">夜ボーナス:</label>
+            <div class="mb-2">
+                <label for="evening_bonus" class="form-label animated-label">夜ボーナス: </label>
                 <div class="form-check form-check-inline">
                     <input type="radio" id="evening_bonus_none" name="evening_bonus" class="form-check-input animated-input" value="none" {{ old('evening_bonus', 'none') === 'none' ? 'checked' : '' }}>
                     <label for="evening_bonus_none" class="form-check-label animated-label">なし</label>
@@ -148,8 +158,8 @@
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="morning_delay_bonus" class="form-label animated-label">遅延ボーナス(朝):</label>
+            <div class="mb-2">
+                <label for="morning_delay_bonus" class="form-label animated-label">遅延ボーナス(朝): </label>
                 <div class="form-check form-check-inline">
                     <input type="radio" id="morning_delay_bonus_none" name="morning_delay_bonus" class="form-check-input animated-input"  value="none" {{ old('morning_delay_bonus', 'none') === 'none' ? 'checked' : '' }}>
                     <label for="morning_delay_bonus_none" class="form-check-label animated-label">なし</label>
@@ -160,8 +170,8 @@
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="afternoon_delay_bonus" class="form-label animated-label">遅延ボーナス(昼):</label>
+            <div class="mb-2">
+                <label for="afternoon_delay_bonus" class="form-label animated-label">遅延ボーナス(昼): </label>
                 <div class="form-check form-check-inline">
                     <input type="radio" id="afternoon_delay_bonus_none" name="afternoon_delay_bonus" class="form-check-input animated-input"  value="none" {{ old('afternoon_delay_bonus', 'none') === 'none' ? 'checked' : '' }}>
                     <label for="afternoon_delay_bonus_none" class="form-check-label animated-label">なし</label>
@@ -172,8 +182,8 @@
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="evening_delay_bonus" class="form-label animated-label">遅延ボーナス(夕):</label>
+            <div class="mb-2">
+                <label for="evening_delay_bonus" class="form-label animated-label">遅延ボーナス(夕): </label>
                 <div class="form-check form-check-inline">
                     <input type="radio" id="evening_delay_bonus_none" name="evening_delay_bonus" class="form-check-input animated-input"  value="none" {{ old('evening_delay_bonus', 'none') === 'none' ? 'checked' : '' }}>
                     <label for="evening_delay_bonus_none" class="form-check-label animated-label">なし</label>
@@ -184,7 +194,7 @@
                 </div>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-2">
                 <button type="submit" class="btn btn-primary">確認</button>
             </div>
         </form>

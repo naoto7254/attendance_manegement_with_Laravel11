@@ -12,15 +12,23 @@
             background-position: center;
             padding: 0;
             margin: 0;
+            font-family: "游明朝", "Yu Mincho", "MS Mincho", "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", serif;
         }
 
         .container {
             background-color: rgba(255, 255, 255, 0.8);
             padding: 2rem;
             border-radius: 8px;
-            max-width: 800px;
+            max-width: 500px;
             margin: 2rem auto;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            width: 215px;
         }
 
         table {
@@ -48,10 +56,12 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="mb-4">登録情報確認ページ</h1>
+    <img src="{{ asset('images/mid_fiels_farm_log.svg') }}" alt="Logo" class="logo">
 
-        <h2 class="mb-3">基本給料</h2>
+    <div class="container">
+        <h1 class="mb-3">登録情報確認ページ</h1>
+
+        <h5 class="mb-2">基本給料</h5>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -71,7 +81,7 @@
             </tbody>
         </table>
 
-        <h2 class="mb-3">ボーナス給料</h2>
+        <h5 class="mb-2">ボーナス給料</h5>
         <table class="table table-striped">
             <thead>
                 <tr>
