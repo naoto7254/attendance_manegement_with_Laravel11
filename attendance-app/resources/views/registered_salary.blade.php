@@ -56,7 +56,8 @@
 </head>
 <body>
     <img src="{{ asset('images/mid_fiels_farm_log.svg') }}" alt="Logo" class="logo">
-    <p> {{ $insertData }} </p>
+    <p>登録完了！！！</p>
+    {{-- <p> {{ $insertData }} </p> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
