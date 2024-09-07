@@ -78,6 +78,7 @@ class SalaryController extends Controller
         // returnさせたいデータ
         $tableDataBasicSalary = $this->toTableBasicSalaryResult($baseSalary);
         $tableDataBonusSalary = $this->toTableBonusSalaryResult($bonusSalary);
+        $insertData = $this->insertData($partUser, $data, $baseSalary, $bonusSalary);
 
         return view('confirm_salary', [
             'data' => $data,
@@ -86,6 +87,7 @@ class SalaryController extends Controller
             'bonusSalary' => $bonusSalary,
             'tableDataBasicSalary' => $tableDataBasicSalary,
             'tableDataBonusSalary' => $tableDataBonusSalary,
+            'insertData' => $insertData
         ]);
     }
 
@@ -167,5 +169,32 @@ class SalaryController extends Controller
         }
 
         return $tableDataBonusSalary;
+    }
+
+    private function insertData(PartUsers $partUser, array $data, array $baseSalary, array $bonusSalary)
+    {
+        $bonusInfo = [
+            $bonusSalary['morning']['morningBonusSalary'],
+            $bonusSalary['afternoon']['afternoonBonusSalary'],
+            $bonusSalary['evening']['eveningBonusSalary']
+        ];
+
+        $delayBonusInfo = [
+            $bonusSalary['morning']['morningDelayBonusSalary'],
+            $bonusSalary['afternoon']['afternoonDelayBonusSalary'],
+            $bonusSalary['evening']['eveningDelayBonusSalary']
+        ];
+
+        $result = [
+            'date' => $data['date'],
+            'part_timer_id' => $partUser->part_timer_id,
+            'part_timer_name' => $partUser->part_timer_name,
+            'shift_salaries' => $baseSalary,
+            'bonus_info' => $bonusInfo,
+            'delay_bonus_info' => $delayBonusInfo
+        ];
+
+
+        return json_encode($result, JSON_UNESCAPED_UNICODE);
     }
 }

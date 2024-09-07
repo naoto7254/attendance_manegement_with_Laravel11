@@ -56,10 +56,7 @@
     </style>
 </head>
 <body>
-        {{-- <p> {{ var_export($data); }} </p>
-        <p> {{ var_export($partUser); }} </p>
-        <p> {{ var_export($baseSalary); }} </p>
-        <p> {{ var_export($bonusSalary); }} </p> --}}
+        {{-- <p> {{ var_export($insertData); }} </p> --}}
 
     <img src="{{ asset('images/mid_fiels_farm_log.svg') }}" alt="Logo" class="logo">
 
@@ -108,10 +105,7 @@
 
         <form action="{{ route('salary.registered') }}" method="POST">
             @csrf
-            <input type="hidden" name="data" value="{{ json_encode($data) }}">
-            <input type="hidden" name="partUser" value="{{ json_encode($partUser) }}">
-            <input type="hidden" name="baseSalary" value="{{ json_encode($baseSalary) }}">
-            <input type="hidden" name="bonusSalary" value="{{ json_encode($bonusSalary) }}">
+            <input type="hidden" name="insertData" value="{{ $insertData }}">
 
             <button type="submit" class="btn btn-primary">登録</button>
             <button type="button" class="btn btn-primary" onclick="history.back()">戻る</button>
