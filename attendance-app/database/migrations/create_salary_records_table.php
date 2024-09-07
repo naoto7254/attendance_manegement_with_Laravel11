@@ -14,7 +14,11 @@ return new class extends Migration
         Schema::create('salary_records', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->foreignId('part_timer_id')->constrained('part_users');
+            $table->unsignedBigInteger('part_timer_id');
+            $table->string('part_timer_name');
+            $table->json('shift_salaries')->nullable();
+            $table->json('bonus_info')->nullable();
+            $table->json('delay_bonus_info')->nullable();
             $table->timestamps();
         });
     }

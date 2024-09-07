@@ -85,7 +85,7 @@ class SalaryController extends Controller
             'baseSalary' => $baseSalary,
             'bonusSalary' => $bonusSalary,
             'tableDataBasicSalary' => $tableDataBasicSalary,
-            'tableDataBonusSalary' => $tableDataBonusSalary
+            'tableDataBonusSalary' => $tableDataBonusSalary,
         ]);
     }
 

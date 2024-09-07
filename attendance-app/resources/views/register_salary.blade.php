@@ -8,7 +8,7 @@
 
     <style>
         body {
-            background-image: url('{{ asset('images/background.png') }}');
+            background-image: url('{{ asset('images/main_image.mp4') }}');
             background-size: cover;
             background-position: center;
             margin: 0;

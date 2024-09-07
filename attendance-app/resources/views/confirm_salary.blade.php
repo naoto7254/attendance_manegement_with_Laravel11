@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Confirm Salary</title>
+    <title>給与確認</title>
     <style>
         body {
             background-image: url('{{ asset('images/background.png') }}');
@@ -56,6 +56,11 @@
     </style>
 </head>
 <body>
+        {{-- <p> {{ var_export($data); }} </p>
+        <p> {{ var_export($partUser); }} </p>
+        <p> {{ var_export($baseSalary); }} </p>
+        <p> {{ var_export($bonusSalary); }} </p> --}}
+
     <img src="{{ asset('images/mid_fiels_farm_log.svg') }}" alt="Logo" class="logo">
 
     <div class="container">
@@ -101,7 +106,14 @@
             </tbody>
         </table>
 
-        <form action="" class="text-end">
+        <form action="{{ route('salary.registered') }}" method="POST">
+            @csrf
+            <input type="hidden" name="data" value="{{ json_encode($data) }}">
+            <input type="hidden" name="partUser" value="{{ json_encode($partUser) }}">
+            <input type="hidden" name="baseSalary" value="{{ json_encode($baseSalary) }}">
+            <input type="hidden" name="bonusSalary" value="{{ json_encode($bonusSalary) }}">
+
+            <button type="submit" class="btn btn-primary">登録</button>
             <button type="button" class="btn btn-primary" onclick="history.back()">戻る</button>
         </form>
     </div>
