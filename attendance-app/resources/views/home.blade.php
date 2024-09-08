@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>勤怠登録</title>
-
+    <title>ホーム画面</title>
     <style>
         body {
             background-image: url('{{ asset('images/background.png') }}');
@@ -21,7 +20,7 @@
         }
 
         .custom-container {
-            background-color: rgba(255, 255, 255, 0.5);
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 2rem;
             border-radius: 8px;
             width: 100%;
@@ -29,36 +28,12 @@
             margin: 2rem auto;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         }
-
-        .logo {
-            position: absolute;
-            top: 20px;
-            left: 30px;
-            width: 215px;
-        }
-
-        .animated-input {
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .animated-input:checked + .animated-label {
-            background-color: #cce5ff;
-            border-radius: 5px;
-            padding: 5px;
-        }
-
-        .animated-label {
-            transition: background-color 0.3s ease, padding 0.3s ease;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
-    <img src="{{ asset('images/mid_fiels_farm_log.svg') }}" alt="Logo" class="logo">
-
     <div class="custom-container">
-        <h1 style="text-align: center;">登録完了！</h1>
+        <h1 style="text-align: center;">ホーム画面</h1>
+        {{-- <a href="{{ route('register') }}" class="btn btn-primary">登録画面へ戻る</a> --}}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

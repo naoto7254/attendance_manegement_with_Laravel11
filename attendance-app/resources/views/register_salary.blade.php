@@ -198,10 +198,6 @@
                 <button type="submit" class="btn btn-primary">確認</button>
             </div>
         </form>
-
-        {{-- 【ToDo】ボーナスの情報 --}}
-        {{-- 【ToDo】遅延ボーナスの情報 --}}
-        {{-- 【ToDo】バリデーション処理結果の表示 --}}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
