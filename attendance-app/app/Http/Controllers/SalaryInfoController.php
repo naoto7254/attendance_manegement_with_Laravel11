@@ -22,7 +22,6 @@ class SalaryInfoController extends Controller
             'delay_bonus_info' => $insertData['delay_bonus_info']
         ]);
 
-
         return view('registered_salary', [
             'insertData' => $insertData
         ]);

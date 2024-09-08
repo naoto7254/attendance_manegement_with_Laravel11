@@ -103,7 +103,7 @@
             </tbody>
         </table>
 
-        <form action="{{ route('salary.registered') }}" method="POST">
+        <form action="{{ route('salary.registered') }}" method="POST" onsubmit="disableSubmitButton(this)">
             @csrf
             <input type="hidden" name="insertData" value="{{ $insertData }}">
 
@@ -111,6 +111,14 @@
             <button type="button" class="btn btn-primary" onclick="history.back()">戻る</button>
         </form>
     </div>
+
+    <script>
+        function disableSubmitButton(form) {
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = '登録中...';
+        }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
