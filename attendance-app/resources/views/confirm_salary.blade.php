@@ -20,7 +20,7 @@
             padding: 2rem;
             border-radius: 8px;
             max-width: 500px;
-            margin: 2rem auto;
+            margin: 5rem auto;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         }
 
@@ -53,12 +53,78 @@
         .btn-primary {
             margin-top: 1rem;
         }
+
+        .text {
+            position: absolute;
+            top: 75px;
+            left: 88px;
+            z-index: 5;
+            width: 236px,;
+            padding-top: 57px;
+        }
+
+        /* ハンバーガーメニューのスタイル */
+        .hamburger {
+            cursor: pointer;
+            display: inline-block;
+            position: absolute;
+            top: 20px;
+            right: 50px;
+        }
+
+        .hamburger .line {
+            width: 30px;
+            height: 5px;
+            background-color: #333;
+            margin: 5px 0;
+        }
+
+        .menu {
+            display: none;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            background-color: #f0f0f0;
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            width: 150px;
+        }
+
+        .menu li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .menu li:last-child {
+            border-bottom: none;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .menu.show {
+            display: block;
+        }
     </style>
 </head>
 <body>
-        {{-- <p> {{ var_export($insertData); }} </p> --}}
 
     <img src="{{ asset('images/mid_fiels_farm_log.svg') }}" alt="Logo" class="logo">
+    {{-- <img src="{{ asset('images/main_text.png') }}" alt="Main Message" class="text"> --}}
+
+    <ul class="menu" id="menu">
+        <li><a href="{{ route('home') }}">ホーム</a></li>
+        <li><a href="{{ route('salary.register') }}">給与登録</a></li>
+    </ul>
+
+    <div class="hamburger" onclick="toggleMenu()">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
 
     <div class="container">
         <h1 class="mb-3">登録情報確認ページ</h1>
@@ -117,6 +183,13 @@
             const submitButton = form.querySelector('button[type="submit"]');
             submitButton.disabled = true;
             submitButton.textContent = '登録中...';
+        }
+    </script>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            menu.classList.toggle('show');
         }
     </script>
 

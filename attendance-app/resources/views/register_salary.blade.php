@@ -52,13 +52,80 @@
             transition: background-color 0.3s ease, padding 0.3s ease;
             cursor: pointer;
         }
+
+        .text {
+            position: absolute;
+            top: 75px;
+            left: 88px;
+            z-index: 5;
+            width: 236px,;
+            padding-top: 57px;
+        }
+
+        /* ハンバーガーメニューのスタイル */
+        .hamburger {
+            cursor: pointer;
+            display: inline-block;
+            position: absolute;
+            top: 20px;
+            right: 50px;
+        }
+
+        .hamburger .line {
+            width: 30px;
+            height: 5px;
+            background-color: #333;
+            margin: 5px 0;
+        }
+
+        .menu {
+            display: none;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            background-color: #f0f0f0;
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            width: 150px;
+        }
+
+        .menu li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .menu li:last-child {
+            border-bottom: none;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .menu.show {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <img src="{{ asset('images/mid_fiels_farm_log.svg') }}" alt="Logo" class="logo">
+    {{-- <img src="{{ asset('images/main_text.png') }}" alt="Main Message" class="text"> --}}
 
     <div class="custom-container mt5">
         <h1 class="container mb-3">勤怠登録画面</h1>
+
+    <ul class="menu" id="menu">
+        <li><a href="{{ route('home') }}">ホーム</a></li>
+        <li><a href="{{ route('salary.register') }}">給与登録</a></li>
+    </ul>
+
+    <div class="hamburger" onclick="toggleMenu()">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -199,6 +266,13 @@
             </div>
         </form>
     </div>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            menu.classList.toggle('show');
+        }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

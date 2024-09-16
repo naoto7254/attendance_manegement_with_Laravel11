@@ -22,3 +22,5 @@ yarn-error.log
 /lang
 /test_code.php
 ../.DS_Store
+.DS_Store
+**/.DS_Store
