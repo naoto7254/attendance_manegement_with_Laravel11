@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PartUsers;
 use App\Services\SalaryCalculator;
+use Ramsey\Uuid\Codec\StringCodec;
 
 class SalaryController extends Controller
 {
@@ -171,7 +172,7 @@ class SalaryController extends Controller
         return $tableDataBonusSalary;
     }
 
-    private function insertData(PartUsers $partUser, array $data, array $baseSalary, array $bonusSalary)
+    private function insertData(PartUsers $partUser, array $data, array $baseSalary, array $bonusSalary): string
     {
         $bonusInfo = [
             $bonusSalary['morning']['morningBonusSalary'],
